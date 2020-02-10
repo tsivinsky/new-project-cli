@@ -1,0 +1,20 @@
+{
+  "name": "@tsivinsky17/new-project",
+  "version": "1.0.0",
+  "description": "CLI for create a new project based on boilerplate",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "Daniil Tsivinsky",
+  "license": "MIT",
+  "bin": {
+    "new-project": "./cli.js"
+  },
+  "dependencies": {
+    "shelljs": "^0.8.3"
+  }
+}
