@@ -20,7 +20,7 @@ const userDir = process.cwd();
 
 switch (projectType) {
   case "react-webpack":
-    if (args[1]) {
+    if (projectName) {
       createWebpackReact(userDir, projectName);
     } else {
       console.log("Type a valid name of project");

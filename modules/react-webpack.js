@@ -1,31 +1,34 @@
 // Require modules
 const fs = require("fs");
 const shell = require("shelljs");
+const { splitPackages, addFile, readFile, writeJson } = require("../functions");
 
 module.exports = function createWebpackReact(userDir, projectName) {
+  const baseUrl = userDir + "/" + projectName;
+
   // Templates
-  const htmlTemplate = fs.readFileSync(
+  const htmlTemplate = readFile(
     __dirname + "/../templates/react-webpack/index.html"
   );
-  const indexJSTemplate = fs.readFileSync(
+  const indexJSTemplate = readFile(
     __dirname + "/../templates/react-webpack/index.js"
   );
-  const AppJSXTemplate = fs.readFileSync(
+  const AppJSXTemplate = readFile(
     __dirname + "/../templates/react-webpack/App.jsx"
   );
-  const styleTemplate = fs.readFileSync(
+  const styleTemplate = readFile(
     `${__dirname}/../templates/react-webpack/style.scss`
   );
-  const webpackConfig = fs.readFileSync(
+  const webpackConfig = readFile(
     `${__dirname}/../templates/react-webpack/webpack.config.js`,
     "utf-8"
   );
-  const babelConfig = fs.readFileSync(
+  const babelConfig = readFile(
     `${__dirname}/../templates/react-webpack/.babelrc`,
     "utf-8"
   );
 
-  // Array of packages for new project
+  // Array of packages
   const packages = ["react", "react-dom"];
   const devPackages = [
     "webpack",
@@ -44,100 +47,71 @@ module.exports = function createWebpackReact(userDir, projectName) {
     "url-loader"
   ];
 
-  // Object of name and value for new project
+  // Object of scripts
   const scripts = {
     start: "webpack-dev-server --mode development --open --hot",
     build: "webpack --mode production"
   };
 
   // Check folder of project name for existing
-  if (fs.existsSync(`${userDir}/${projectName}`)) {
+  if (fs.existsSync(baseUrl)) {
     return console.log(`Folder with name \"${projectName}\" already exists.`);
   }
 
   // Create a project folder
-  fs.mkdirSync(`${userDir}/${projectName}`);
+  fs.mkdirSync(baseUrl);
 
   // Cd to a new project folder and initialize it
   shell.exec(`cd ${projectName} && npm init -y`);
 
-  console.log("Now, script is installing dependencies to your new project");
+  console.log("Now, script is installing dependencies to your new project.");
 
   // Install usual dependencies
-  let packagesString = "";
-  packages.forEach(package => {
-    packagesString += `${package} `;
-  });
-  shell.exec(`cd ${projectName} && npm install ${packagesString}`);
+  shell.exec(splitPackages(packages, projectName));
 
   console.log(
     "Usual dependencies was installed and dev dependencies will install now."
   );
 
   // Install dev dependencies
-  let devPackagesString = "";
-  devPackages.forEach(package => {
-    devPackagesString += `${package} `;
-  });
-  shell.exec(`cd ${projectName} && npm install ${devPackagesString}`);
+  if (typeof devPackages !== "undefined") {
+    shell.exec(splitPackages(devPackages, projectName));
+  }
 
   console.log(
-    "All dependencies was installed and now script is setting up your new project"
+    "All dependencies was installed and now script is setting up your new project."
   );
 
   // Read package.json file in new directory
   const packageJSON = JSON.parse(
-    fs.readFileSync(`${userDir}/${projectName}/package.json`),
+    fs.readFileSync(`${baseUrl}/package.json`),
     "utf-8"
   );
 
   // Add scripts to package.json file in new directory
   packageJSON.scripts.start = scripts.start;
   packageJSON.scripts.build = scripts.build;
-  fs.writeFileSync(
-    `${userDir}/${projectName}/package.json`,
-    JSON.stringify(packageJSON, null, 2),
-    "utf-8"
-  );
+  writeJson(`${baseUrl}/package.json`, packageJSON);
 
   // Create webpack and babel files in new project folder
-  fs.appendFileSync(
-    `${userDir}/${projectName}/webpack.config.js`,
-    webpackConfig
-  );
-  fs.appendFileSync(`${userDir}/${projectName}/.babelrc`, babelConfig);
+  addFile(`${baseUrl}/webpack.config.js`, webpackConfig);
+  addFile(`${baseUrl}/.babelrc`, babelConfig);
 
   // Create a src folder
-  fs.mkdirSync(`${userDir}/${projectName}/src`);
+  fs.mkdirSync(`${baseUrl}/src`);
 
   // Create index.html file
-  fs.appendFileSync(
-    `${userDir}/${projectName}/src/index.html`,
-    htmlTemplate,
-    "utf-8"
-  );
+  addFile(`${baseUrl}/src/index.html`, htmlTemplate);
 
   // Create index.js file
-  fs.appendFileSync(
-    `${userDir}/${projectName}/src/index.js`,
-    indexJSTemplate,
-    "utf-8"
-  );
+  addFile(`${baseUrl}/src/index.js`, indexJSTemplate);
 
   // Create App.jsx file
-  fs.appendFileSync(
-    `${userDir}/${projectName}/src/App.jsx`,
-    AppJSXTemplate,
-    "utf-8"
-  );
+  addFile(`${baseUrl}/src/App.jsx`, AppJSXTemplate);
 
   // Create style directory in project folder
-  fs.mkdirSync(`${userDir}/${projectName}/src/style`);
+  fs.mkdirSync(`${baseUrl}/src/style`);
 
   // Add style.scss file to style folder
-  fs.appendFileSync(
-    `${userDir}/${projectName}/src/style/style.scss`,
-    styleTemplate,
-    "utf-8"
-  );
+  addFile(`${baseUrl}/src/style/style.scss`, styleTemplate);
 };
