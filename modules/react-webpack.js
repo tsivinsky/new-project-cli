@@ -13,6 +13,9 @@ module.exports = function createWebpackReact(userDir, projectName) {
   const AppJSXTemplate = fs.readFileSync(
     __dirname + "/../templates/react-webpack/App.jsx"
   );
+  const styleTemplate = fs.readFileSync(
+    `${__dirname}/../templates/react-webpack/style.scss`
+  );
   const webpackConfig = fs.readFileSync(
     `${__dirname}/../templates/react-webpack/webpack.config.js`,
     "utf-8"
@@ -125,6 +128,16 @@ module.exports = function createWebpackReact(userDir, projectName) {
   fs.appendFileSync(
     `${userDir}/${projectName}/src/App.jsx`,
     AppJSXTemplate,
+    "utf-8"
+  );
+
+  // Create style directory in project folder
+  fs.mkdirSync(`${userDir}/${projectName}/src/style`);
+
+  // Add style.scss file to style folder
+  fs.appendFileSync(
+    `${userDir}/${projectName}/src/style/style.scss`,
+    styleTemplate,
     "utf-8"
   );
 };
