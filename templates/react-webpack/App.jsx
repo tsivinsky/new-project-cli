@@ -8,6 +8,7 @@ export default function App() {
       <h1>
         Edit <code>App.jsx</code> file to start!
       </h1>
+      <a href="https://github.com/tsivinsky">Author</a>
     </div>
   );
 }
