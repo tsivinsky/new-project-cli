@@ -1,11 +1,15 @@
 const fs = require("fs");
 
-function splitPackages(packages, projectName) {
+function splitPackages(packages, projectName, dev) {
   let packagesString = "";
   packages.forEach(package => {
     packagesString += `${package} `;
   });
-  return `cd ${projectName} && npm install ${packagesString}`;
+  if (dev) {
+    return `cd ${projectName} && npm install ${packagesString} --save-dev`;
+  } else {
+    return `cd ${projectName} && npm install ${packagesString}`;
+  }
 }
 
 function addFile(path, file) {
