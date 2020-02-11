@@ -1,25 +1,39 @@
 # new-project-cli
 
-**First of all, you need to install package by type:**
+## Install
+
+---
 
 ```
   npm i -g @tsivinsky17/new-project
 ```
 
-After that, you can use it.
+## Usage
 
 ---
-
-There is a command template below:
 
 ```
   new-project <PROJECT_TYPE> <PROJECT_NAME>
 ```
 
-For now, there is only one project type and you can use it by type this command:
+## Project Types
+
+---
+
+### **React Webpack Application**
+
+For create that type, just type this command in your terminal:
 
 ```
  new-project react-webpack <PROJECT_NAME>
 ```
 
 That allows you to create a new project based on React and Webpack with Sass as stylesheet.
+
+### **Express Application**
+
+For create node.js application based on Express Framework, just type that command:
+
+```
+  new-project express-app <PROJECT_NAME>
+```
