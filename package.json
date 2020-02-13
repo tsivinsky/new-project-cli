@@ -10,7 +10,11 @@
     "cli",
     "create-project",
     "cli-script",
-    "new-project"
+    "new-project",
+    "react",
+    "webpack",
+    "react-webpack",
+    "express"
   ],
   "author": "Daniil Tsivinsky",
   "license": "MIT",
