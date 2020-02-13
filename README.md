@@ -2,15 +2,11 @@
 
 ## Install
 
----
-
 ```
   npm i -g @tsivinsky17/new-project
 ```
 
 ## Version
-
----
 
 For see version of package, add -v or --version flag
 
@@ -26,8 +22,6 @@ Or
 
 ## Help
 
----
-
 For see help, add -h or --help flag
 
 ```
@@ -42,15 +36,11 @@ Or
 
 ## Usage
 
----
-
 ```
   new-project <PROJECT_TYPE> <PROJECT_NAME>
 ```
 
 ## Project Types
-
----
 
 ### **React Webpack Application**
 
