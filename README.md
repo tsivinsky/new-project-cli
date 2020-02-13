@@ -8,6 +8,38 @@
   npm i -g @tsivinsky17/new-project
 ```
 
+## Version
+
+---
+
+For see version of package, add -v or --version flag
+
+```
+  new-project -v
+```
+
+Or
+
+```
+  new-project --version
+```
+
+## Help
+
+---
+
+For see help, add -h or --help flag
+
+```
+  new-project -v
+```
+
+Or
+
+```
+  new-project --version
+```
+
 ## Usage
 
 ---
