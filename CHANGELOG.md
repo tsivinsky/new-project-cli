@@ -1,3 +1,10 @@
+# 2.2.0
+
+- Add new project type: Electron App
+- Add option for change main file
+- Add flex-direction value into style.scss in react-webpack template
+- Change second info about version argument to help info in README
+
 # 2.1.2
 
 - Remove all horizonal lines from README
