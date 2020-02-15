@@ -1,3 +1,7 @@
+# 2.2.1
+
+- Add checks for type and name of project
+
 # 2.2.0
 
 - Add new project type: Electron App
