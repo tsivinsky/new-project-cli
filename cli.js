@@ -21,6 +21,10 @@ const [, , ...args] = process.argv;
 const projectType = args[0];
 const projectName = args[1];
 
+if (projectName && projectName.startsWith("-")) {
+  return console.log("Name of project CANNOT starts with - (dash).");
+}
+
 // Get current user directory
 const userDir = process.cwd();
 
@@ -131,6 +135,10 @@ switch (projectType) {
     break;
 
   default:
-    console.log("Enter a project type after new-project command");
+    if (projectType) {
+      console.log(`Type ${projectType} NOT exists.`);
+    } else {
+      console.log("Enter a project type after new-project command.");
+    }
     break;
 }
