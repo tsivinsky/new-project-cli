@@ -12,6 +12,7 @@ const Project = require("./Project");
 // Get config files
 const ReactWebpackConfig = require("./config/react-webpack");
 const ExpressConfig = require("./config/express-app");
+const ElectronConfig = require("./config/electron-app");
 
 // Get arguments from user
 const [, , ...args] = process.argv;
@@ -39,9 +40,27 @@ ${help.message}
   `);
 }
 
+// Variable for main file
+let mainFile = "";
+
+// Require function for check for argument with main file
+const { checkForFile } = require("./functions");
+
 switch (projectType) {
   case "react-webpack":
     if (projectName) {
+      mainFile = checkForFile(args, "index.js");
+
+      // Change main file path in config
+      ReactWebpackConfig.templates[3].path = `/src/${mainFile}`;
+
+      // Change entry path in webpack template file
+      const webpackConfigFile = ReactWebpackConfig.templates[0].file;
+      ReactWebpackConfig.templates[0].file = webpackConfigFile.replace(
+        /index.js/,
+        mainFile
+      );
+
       // Create a new React Webpack project
       const ReactWebpack = new Project({
         userDir,
@@ -50,7 +69,8 @@ switch (projectType) {
         packages: ReactWebpackConfig.packages,
         scripts: ReactWebpackConfig.scripts,
         templates: ReactWebpackConfig.templates,
-        folders: ReactWebpackConfig.folders
+        folders: ReactWebpackConfig.folders,
+        mainFile
       });
 
       ReactWebpack.create();
@@ -60,6 +80,15 @@ switch (projectType) {
     break;
   case "express-app":
     if (projectName) {
+      mainFile = checkForFile(args, "server.js");
+
+      // Change main file path in config
+      ExpressConfig.templates[1].path = `/${mainFile}`;
+
+      // Change main file in scripts
+      ExpressConfig.scripts[0].value = `node ${mainFile}`;
+      ExpressConfig.scripts[1].value = `nodemon ${mainFile}`;
+
       // Create a new Express project
       const ExpressApp = new Project({
         userDir,
@@ -68,10 +97,34 @@ switch (projectType) {
         packages: ExpressConfig.packages,
         scripts: ExpressConfig.scripts,
         templates: ExpressConfig.templates,
-        folders: ExpressConfig.folders
+        folders: ExpressConfig.folders,
+        mainFile
       });
 
       ExpressApp.create();
+    } else {
+      console.log("Enter a valid name of project");
+    }
+    break;
+  case "electron-app":
+    if (projectName) {
+      mainFile = checkForFile(args, "index.js");
+
+      // Change main file path in config
+      ElectronConfig.templates[1].path = `/${mainFile}`;
+
+      // Create a new Electron project
+      const ElectronApp = new Project({
+        userDir,
+        name: projectName,
+        type: projectType,
+        packages: ElectronConfig.packages,
+        scripts: ElectronConfig.scripts,
+        templates: ElectronConfig.templates,
+        mainFile
+      });
+
+      ElectronApp.create();
     } else {
       console.log("Enter a valid name of project");
     }
