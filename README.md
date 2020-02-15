@@ -25,13 +25,13 @@ Or
 For see help, add -h or --help flag
 
 ```
-  new-project -v
+  new-project -h
 ```
 
 Or
 
 ```
-  new-project --version
+  new-project --help
 ```
 
 ## Usage
@@ -58,4 +58,12 @@ For create node.js application based on Express Framework, just type that comman
 
 ```
   new-project express-app <PROJECT_NAME>
+```
+
+### **Electron Application**
+
+Also, you can create an electron application. For that, just type this command in terminal:
+
+```
+  new-project electron-app <PROJECT_NAME>
 ```
