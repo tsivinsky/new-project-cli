@@ -4,14 +4,24 @@ const shell = require("shelljs");
 const { splitPackages, readFile, writeJson, addFile } = require("./functions");
 
 class Project {
-  constructor({ userDir, name, type, packages, scripts, templates, folders }) {
+  constructor({
+    userDir,
+    name,
+    type,
+    packages,
+    scripts,
+    templates,
+    folders,
+    mainFile
+  }) {
     this.userDir = userDir;
     this.name = name;
     this.type = type;
-    this.packages = packages;
-    this.scripts = [...scripts];
-    this.templates = [...templates];
-    this.folders = [...folders];
+    this.packages = packages ? packages : undefined;
+    this.scripts = scripts ? [...scripts] : undefined;
+    this.templates = templates ? [...templates] : undefined;
+    this.folders = folders ? [...folders] : undefined;
+    this.mainFile = mainFile;
   }
 
   create() {
@@ -51,23 +61,34 @@ class Project {
     const packageJSON = JSON.parse(readFile(`${baseUrl}/package.json`));
 
     // Add scripts to package.json file in new directory
-    this.scripts.forEach(script => {
-      const name = script.name;
-      const value = script.value;
+    if (this.scripts) {
+      this.scripts.forEach(script => {
+        const name = script.name;
+        const value = script.value;
 
-      packageJSON.scripts[name] = value;
-    });
+        packageJSON.scripts[name] = value;
+      });
+    }
+
+    // Change main file in project
+    packageJSON["main"] = this.mainFile;
+
+    // Write changed package.json file
     writeJson(`${baseUrl}/package.json`, packageJSON);
 
     // Create folders
-    this.folders.forEach(folder => {
-      fs.mkdirSync(baseUrl + folder);
-    });
+    if (this.folders) {
+      this.folders.forEach(folder => {
+        fs.mkdirSync(baseUrl + folder);
+      });
+    }
 
     // Add project files
-    this.templates.forEach(template => {
-      addFile(baseUrl + template.path, template.file);
-    });
+    if (this.templates) {
+      this.templates.forEach(template => {
+        addFile(baseUrl + template.path, template.file);
+      });
+    }
   }
 }
 
