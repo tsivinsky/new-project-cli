@@ -22,6 +22,7 @@
     "new-project": "./cli.js"
   },
   "dependencies": {
+    "node-flags": "^0.1.9",
     "shelljs": "^0.8.3"
   }
 }
