@@ -1,4 +1,5 @@
 const fs = require("fs");
+const flags = require("node-flags");
 
 module.exports = {
   splitPackages: function(packages, projectName, dev) {
@@ -20,5 +21,12 @@ module.exports = {
   },
   writeJson: function(path, file) {
     fs.writeFileSync(path, JSON.stringify(file, null, 2), "utf-8");
+  },
+  checkForFile: function(args, defaultFile) {
+    if (flags.get("main-file")) {
+      return flags.get("main-file");
+    } else {
+      return defaultFile;
+    }
   }
 };
