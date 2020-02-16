@@ -48,12 +48,13 @@ ${help.message}
 let mainFile = "";
 
 // Require function for check for argument with main file
-const { checkForFile } = require("./functions");
+const { checkForFile, checkForManager } = require("./functions");
 
 switch (projectType) {
   case "react-webpack":
     if (projectName) {
-      mainFile = checkForFile(args, "index.js");
+      mainFile = checkForFile("index.js");
+      manager = checkForManager();
 
       // Change main file path in config
       ReactWebpackConfig.templates[3].path = `/src/${mainFile}`;
@@ -74,7 +75,8 @@ switch (projectType) {
         scripts: ReactWebpackConfig.scripts,
         templates: ReactWebpackConfig.templates,
         folders: ReactWebpackConfig.folders,
-        mainFile
+        mainFile,
+        manager
       });
 
       ReactWebpack.create();
@@ -84,7 +86,8 @@ switch (projectType) {
     break;
   case "express-app":
     if (projectName) {
-      mainFile = checkForFile(args, "server.js");
+      mainFile = checkForFile("server.js");
+      manager = checkForManager();
 
       // Change main file path in config
       ExpressConfig.templates[1].path = `/${mainFile}`;
@@ -102,7 +105,8 @@ switch (projectType) {
         scripts: ExpressConfig.scripts,
         templates: ExpressConfig.templates,
         folders: ExpressConfig.folders,
-        mainFile
+        mainFile,
+        manager
       });
 
       ExpressApp.create();
@@ -112,7 +116,8 @@ switch (projectType) {
     break;
   case "electron-app":
     if (projectName) {
-      mainFile = checkForFile(args, "index.js");
+      mainFile = checkForFile("main.js");
+      manager = checkForManager();
 
       // Change main file path in config
       ElectronConfig.templates[1].path = `/${mainFile}`;
@@ -125,7 +130,8 @@ switch (projectType) {
         packages: ElectronConfig.packages,
         scripts: ElectronConfig.scripts,
         templates: ElectronConfig.templates,
-        mainFile
+        mainFile,
+        manager
       });
 
       ElectronApp.create();
