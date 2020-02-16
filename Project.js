@@ -12,7 +12,8 @@ class Project {
     scripts,
     templates,
     folders,
-    mainFile
+    mainFile,
+    manager
   }) {
     this.userDir = userDir;
     this.name = name;
@@ -22,6 +23,7 @@ class Project {
     this.templates = templates ? [...templates] : undefined;
     this.folders = folders ? [...folders] : undefined;
     this.mainFile = mainFile;
+    this.manager = manager;
   }
 
   create() {
@@ -37,7 +39,7 @@ class Project {
     fs.mkdirSync(baseUrl);
 
     // Cd to a new project folder and initialize it
-    shell.exec(`cd ${this.name} && npm init -y`);
+    shell.exec(`cd ${this.name} && ${this.manager} init -y`);
 
     console.log("Now, script is installing dependencies to your new project.");
 
@@ -59,6 +61,11 @@ class Project {
 
     // Read package.json file in new directory
     const packageJSON = JSON.parse(readFile(`${baseUrl}/package.json`));
+
+    // Add scripts object if manager === yarn
+    if (this.manager === "yarn") {
+      packageJSON.scripts = {};
+    }
 
     // Add scripts to package.json file in new directory
     if (this.scripts) {
