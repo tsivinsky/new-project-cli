@@ -8,7 +8,7 @@
 
 ## Version
 
-For see version of package, add -v or --version flag
+For see version of your package, add -v or --version flag
 
 ```
   new-project -v
@@ -22,7 +22,7 @@ Or
 
 ## Help
 
-For see help, add -h or --help flag
+For see help message, add -h or --help flag
 
 ```
   new-project -h
@@ -44,7 +44,7 @@ Or
 
 ### **React Webpack Application**
 
-For create that type, just type this command in your terminal:
+#### Usage
 
 ```
  new-project react-webpack <PROJECT_NAME>
@@ -54,7 +54,7 @@ That allows you to create a new project based on React and Webpack with Sass as 
 
 ### **Express Application**
 
-For create node.js application based on Express Framework, just type that command:
+#### Usage
 
 ```
   new-project express-app <PROJECT_NAME>
@@ -62,8 +62,28 @@ For create node.js application based on Express Framework, just type that comman
 
 ### **Electron Application**
 
-Also, you can create an electron application. For that, just type this command in terminal:
+#### Usage
 
 ```
   new-project electron-app <PROJECT_NAME>
 ```
+
+### **Additional flags**
+
+1. --main-file<br>
+   This flag allow you to change main file name of new project, like this:
+
+```
+  new-project react-webpack react-app --main-file=app.js
+```
+
+That flag is supported by all project types.
+
+2. --yarn<br>
+   This flag allow you set default package manager to yarn.
+
+```
+  new-project react-webpack react-app --yarn
+```
+
+That flag also is supported by all types.
