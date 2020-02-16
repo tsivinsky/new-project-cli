@@ -1,3 +1,7 @@
+# 2.3.0
+
+- Add option for choose default package manager (npm or yarn)
+
 # 2.2.1
 
 - Add checks for type and name of project
