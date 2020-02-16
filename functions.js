@@ -22,11 +22,18 @@ module.exports = {
   writeJson: function(path, file) {
     fs.writeFileSync(path, JSON.stringify(file, null, 2), "utf-8");
   },
-  checkForFile: function(args, defaultFile) {
+  checkForFile: function(defaultFile) {
     if (flags.get("main-file")) {
       return flags.get("main-file");
     } else {
       return defaultFile;
+    }
+  },
+  checkForManager: function() {
+    if (flags.get("yarn")) {
+      return "yarn";
+    } else {
+      return "npm";
     }
   }
 };
