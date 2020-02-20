@@ -1,0 +1,4 @@
+    proxy: [{
+      path: "/api/",
+      target: "--PROXY--"
+    }]
