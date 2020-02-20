@@ -1,3 +1,8 @@
+# 2.5.0
+
+- Add --proxy flag, which allows you to implement proxy url to your react app
+- Replace webpack.config.js file with plain txt file
+
 # 2.4.0
 
 - Add chalk package for prettier logs into console
