@@ -1,3 +1,7 @@
+# 2.4.0
+
+- Add chalk package for prettier logs into console
+
 # 2.3.0
 
 - Add option for choose default package manager (npm or yarn)
