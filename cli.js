@@ -1,7 +1,8 @@
 #! /usr/bin/env node
 
-// Require chalk
+// Require dependencies
 const chalk = require("chalk");
+const fs = require("fs");
 
 // Require Project class
 const Project = require("./Project");
@@ -25,7 +26,7 @@ const projectType = args[0];
 const projectName = args[1];
 
 if (projectName && projectName.startsWith("-")) {
-  return console.log("Name of project CANNOT starts with - (dash).");
+  return console.log(chalk.red("Name of project CANNOT starts with - (dash)."));
 }
 
 // Get current user directory
@@ -50,8 +51,8 @@ ${help.message}
 // Variable for main file
 let mainFile = "";
 
-// Require function for check for argument with main file
-const { checkForFile, checkForManager } = require("./functions");
+// Require function for check for arguments with main file
+const { checkForFile, checkForManager, checkForProxy } = require("./functions");
 
 switch (projectType) {
   case "react-webpack":
@@ -63,11 +64,30 @@ switch (projectType) {
       ReactWebpackConfig.templates[3].path = `/src/${mainFile}`;
 
       // Change entry path in webpack template file
-      const webpackConfigFile = ReactWebpackConfig.templates[0].file;
-      ReactWebpackConfig.templates[0].file = webpackConfigFile.replace(
-        /index.js/,
+      let webpackConfigFile = ReactWebpackConfig.templates[0].file;
+      webpackConfigFile = webpackConfigFile.replace(
+        /--MAINFILENAME--/,
         mainFile
       );
+
+      const proxy = checkForProxy();
+      if (proxy) {
+        // Get proxy text from txt file
+        let proxyText = fs.readFileSync("./templates/proxy.txt").toString();
+        proxyText = proxyText.replace(/--PROXY--/, proxy);
+        webpackConfigFile = webpackConfigFile.replace(
+          /--PORT--/,
+          'port: "3000",\n' + proxyText
+        );
+      } else {
+        webpackConfigFile = webpackConfigFile.replace(
+          /--PORT--/,
+          'port: "3000"'
+        );
+      }
+
+      // Save new webpack config file in templates
+      ReactWebpackConfig.templates[0].file = webpackConfigFile;
 
       // Create a new React Webpack project
       const ReactWebpack = new Project({
