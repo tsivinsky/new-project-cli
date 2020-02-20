@@ -34,9 +34,7 @@ module.exports = {
     // webpack.config.js
     {
       path: "/webpack.config.js",
-      file: readFile(
-        `${__dirname}/../templates/react-webpack/webpack.config.js`
-      )
+      file: readFile(`${__dirname}/../templates/react-webpack/webpack.txt`)
     },
     // .babelrc
     {
