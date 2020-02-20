@@ -1,6 +1,7 @@
 // Require dependencies
 const fs = require("fs");
 const shell = require("shelljs");
+const chalk = require("chalk");
 const { splitPackages, readFile, writeJson, addFile } = require("./functions");
 
 class Project {
@@ -41,13 +42,17 @@ class Project {
     // Cd to a new project folder and initialize it
     shell.exec(`cd ${this.name} && ${this.manager} init -y`);
 
-    console.log("Now, script is installing dependencies to your new project.");
+    console.log(
+      chalk.green("Now, script is installing dependencies to your new project.")
+    );
 
     // Install usual dependencies
     shell.exec(splitPackages(this.packages.usual, this.name, false));
 
     console.log(
-      "Usual dependencies was installed and dev dependencies will install now."
+      chalk.green(
+        "Usual dependencies was installed and dev dependencies will install now."
+      )
     );
 
     // Install dev dependencies
@@ -56,13 +61,15 @@ class Project {
     }
 
     console.log(
-      "All dependencies was installed and now script is setting up your new project."
+      chalk.green(
+        "All dependencies was installed and now script is setting up your new project."
+      )
     );
 
     // Read package.json file in new directory
     const packageJSON = JSON.parse(readFile(`${baseUrl}/package.json`));
 
-    // Add scripts object if manager === yarn
+    // Add scripts object if user uses yarn as package manager
     if (this.manager === "yarn") {
       packageJSON.scripts = {};
     }

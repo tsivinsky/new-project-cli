@@ -1,11 +1,14 @@
 #! /usr/bin/env node
 
+// Require chalk
+const chalk = require("chalk");
+
 // Require Project class
 const Project = require("./Project");
 
 /* Arguments
   1. Project type
-  2. Name of project
+  2. Project name
   3. Additional options
 */
 
@@ -81,7 +84,7 @@ switch (projectType) {
 
       ReactWebpack.create();
     } else {
-      console.log("Enter a valid name of project");
+      console.log(chalk.yellow("Enter a valid name of project"));
     }
     break;
   case "express-app":
@@ -111,7 +114,7 @@ switch (projectType) {
 
       ExpressApp.create();
     } else {
-      console.log("Enter a valid name of project");
+      console.log(chalk.yellow("Enter a valid name of project"));
     }
     break;
   case "electron-app":
@@ -136,15 +139,17 @@ switch (projectType) {
 
       ElectronApp.create();
     } else {
-      console.log("Enter a valid name of project");
+      console.log(chalk.yellow("Enter a valid name of project"));
     }
     break;
 
   default:
     if (projectType) {
-      console.log(`Type ${projectType} NOT exists.`);
+      console.log(chalk.red(`Type ${projectType} NOT exists.`));
     } else {
-      console.log("Enter a project type after new-project command.");
+      console.log(
+        chalk.yellow("Enter a project type after new-project command.")
+      );
     }
     break;
 }
