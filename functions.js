@@ -35,5 +35,10 @@ module.exports = {
     } else {
       return "npm";
     }
+  },
+  checkForProxy: function() {
+    if (flags.get("proxy")) {
+      return flags.get("proxy");
+    }
   }
 };
