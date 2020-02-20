@@ -71,7 +71,7 @@ That allows you to create a new project based on React and Webpack with Sass as 
 ### **Additional flags**
 
 1. --main-file<br>
-   This flag allow you to change main file name of new project, like this:
+   This flag allows you to change main file name of new project, like this:
 
 ```
   new-project react-webpack react-app --main-file=app.js
@@ -80,10 +80,19 @@ That allows you to create a new project based on React and Webpack with Sass as 
 That flag is supported by all project types.
 
 2. --yarn<br>
-   This flag allow you set default package manager to yarn.
+   This flag allows you to set default package manager to yarn.
 
 ```
   new-project react-webpack react-app --yarn
 ```
 
 That flag also is supported by all types.
+
+3. --proxy<br>
+   This flag allows you to set proxy field to webpack config file
+
+```
+  new-project react-webpack react-app --proxy=http://localhost:5000
+```
+
+It is supported only by react-webpack type.
