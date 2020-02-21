@@ -59,7 +59,9 @@ class Project {
 
     // Install dev dependencies
     if (typeof this.packages.dev !== "undefined") {
-      shell.exec(splitPackages(this.packages.dev, this.name, true));
+      shell.exec(
+        splitPackages(this.packages.dev, this.name, true, this.manager)
+      );
     }
 
     console.log(
