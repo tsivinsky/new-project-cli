@@ -1,3 +1,7 @@
+# 2.6.2
+
+- Add path.join() method to read files in main file
+
 # 2.6.1
 
 - Fix bug with installing dev packages. Add manager option to splitPackages function with installing dev dependencies
