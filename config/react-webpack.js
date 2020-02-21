@@ -13,10 +13,10 @@ module.exports = {
       "css-loader",
       "html-webpack-plugin",
       "jsx-loader",
-      "node-sass",
-      "sass-loader",
       "style-loader",
-      "url-loader"
+      "url-loader",
+      "node-sass",
+      "sass-loader"
     ],
     usual: ["react", "react-dom"]
   },
