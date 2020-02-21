@@ -141,7 +141,10 @@ switch (projectType) {
         );
 
         const styleLoaders = '["style-loader", "css-loader", "sass-loader"]';
-        webpackConfigFile.replace(/--STYLE LOADERS--/, styleLoaders);
+        webpackConfigFile = webpackConfigFile.replace(
+          /--STYLE LOADERS--/,
+          styleLoaders
+        );
       }
 
       // Save new webpack config file in templates
