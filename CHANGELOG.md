@@ -1,3 +1,8 @@
+# 2.6.0
+
+- Add --no-sass flag for react-webpack type, which allows you to change default styles from scss to css
+- Fix bug with yarn. Earlier, when user enter --yarn flag, it is not used in new project
+
 # 2.5.0
 
 - Add --proxy flag, which allows you to implement proxy url to your react app
