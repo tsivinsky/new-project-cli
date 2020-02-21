@@ -47,7 +47,9 @@ class Project {
     );
 
     // Install usual dependencies
-    shell.exec(splitPackages(this.packages.usual, this.name, false));
+    shell.exec(
+      splitPackages(this.packages.usual, this.name, false, this.manager)
+    );
 
     console.log(
       chalk.green(
