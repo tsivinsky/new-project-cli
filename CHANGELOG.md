@@ -1,3 +1,7 @@
+# 2.6.1
+
+- Fix bug with installing dev packages. Add manager option to splitPackages function with installing dev dependencies
+
 # 2.6.0
 
 - Add --no-sass flag for react-webpack type, which allows you to change default styles from scss to css
