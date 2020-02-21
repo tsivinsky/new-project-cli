@@ -10,7 +10,7 @@ module.exports = {
     if (dev) {
       return `cd ${projectName} && ${
         manager === "npm" ? "npm install" : "yarn add"
-      } ${packagesString} --save-dev`;
+      } ${packagesString} -D`;
     } else {
       return `cd ${projectName} && ${
         manager === "npm" ? "npm install" : "yarn add"
