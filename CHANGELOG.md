@@ -1,3 +1,7 @@
+# 2.6.3
+
+- Change --save-dev flag to -D for correct work with yarn in functions.js file
+
 # 2.6.2
 
 - Add path.join() method to read files in main file
