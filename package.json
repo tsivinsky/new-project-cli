@@ -1,6 +1,6 @@
 {
   "name": "@tsivinsky17/new-project",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "CLI for create a new project based on boilerplate",
   "main": "cli.js",
   "scripts": {
