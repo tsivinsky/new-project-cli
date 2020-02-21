@@ -1,3 +1,7 @@
+# 2.6.4
+
+- Fix bug with generating react-webpack project with sass, when there is --STYLE LOADERS-- string in webpack.config.js file
+
 # 2.6.3
 
 - Change --save-dev flag to -D for correct work with yarn in functions.js file
