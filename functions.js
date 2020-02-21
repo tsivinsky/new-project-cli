@@ -2,15 +2,19 @@ const fs = require("fs");
 const flags = require("node-flags");
 
 module.exports = {
-  splitPackages: function(packages, projectName, dev) {
+  splitPackages: function(packages, projectName, dev, manager) {
     let packagesString = "";
     packages.forEach(package => {
       packagesString += `${package} `;
     });
     if (dev) {
-      return `cd ${projectName} && npm install ${packagesString} --save-dev`;
+      return `cd ${projectName} && ${
+        manager === "npm" ? "npm install" : "yarn add"
+      } ${packagesString} --save-dev`;
     } else {
-      return `cd ${projectName} && npm install ${packagesString}`;
+      return `cd ${projectName} && ${
+        manager === "npm" ? "npm install" : "yarn add"
+      } ${packagesString}`;
     }
   },
   addFile: function(path, file) {
