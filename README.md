@@ -44,17 +44,20 @@ Or
 
 ### **React Webpack Application**
 
-#### Usage
-
 ```
  new-project react-webpack <PROJECT_NAME>
 ```
 
-That allows you to create a new project based on React and Webpack with Sass as stylesheet.
+#### Flags
+
+1. --proxy<br>
+   This flag allows you to set proxy field to webpack config file
+
+```
+  new-project react-webpack react-app --proxy=http://localhost:5000
+```
 
 ### **Express Application**
-
-#### Usage
 
 ```
   new-project express-app <PROJECT_NAME>
@@ -62,13 +65,11 @@ That allows you to create a new project based on React and Webpack with Sass as 
 
 ### **Electron Application**
 
-#### Usage
-
 ```
   new-project electron-app <PROJECT_NAME>
 ```
 
-### **Additional flags**
+### **Flags which is supported by all types**
 
 1. --main-file<br>
    This flag allows you to change main file name of new project, like this:
@@ -77,22 +78,9 @@ That allows you to create a new project based on React and Webpack with Sass as 
   new-project react-webpack react-app --main-file=app.js
 ```
 
-That flag is supported by all project types.
-
 2. --yarn<br>
    This flag allows you to set default package manager to yarn.
 
 ```
   new-project react-webpack react-app --yarn
 ```
-
-That flag also is supported by all types.
-
-3. --proxy<br>
-   This flag allows you to set proxy field to webpack config file
-
-```
-  new-project react-webpack react-app --proxy=http://localhost:5000
-```
-
-It is supported only by react-webpack type.
