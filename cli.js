@@ -60,6 +60,12 @@ switch (projectType) {
       mainFile = checkForFile("index.js");
       manager = checkForManager();
 
+      if (mainFile === "app.js") {
+        return console.log(
+          chalk.red("Sorry but you cannot create main file with name of app.js")
+        );
+      }
+
       // Change main file path in config
       ReactWebpackConfig.templates[3].path = `/src/${mainFile}`;
 
@@ -70,6 +76,7 @@ switch (projectType) {
         mainFile
       );
 
+      // Code which check for --proxy flag
       const proxy = checkForProxy();
       if (proxy) {
         // Get proxy text from txt file
@@ -84,6 +91,52 @@ switch (projectType) {
           /--PORT--/,
           'port: "3000"'
         );
+      }
+
+      // Code which check for --no-sass flag
+      const styleRegexFile = fs
+        .readFileSync("./templates/react-webpack/styleRegex.txt")
+        .toString();
+
+      if (args.includes("--no-sass")) {
+        // Replace scss regex with css one
+        const cssRegex = styleRegexFile.split("-")[0];
+        webpackConfigFile = webpackConfigFile.replace(
+          /--STYLE REGEX--/,
+          cssRegex
+        );
+
+        // Remove sass loader
+        const styleLoaders = '["style-loader", "css-loader"]';
+        webpackConfigFile = webpackConfigFile.replace(
+          /--STYLE LOADERS--/,
+          styleLoaders
+        );
+
+        // Remove sass dependencies from packages array
+        ReactWebpackConfig.packages.dev.splice(
+          ReactWebpackConfig.packages.dev.length - 2
+        );
+
+        // Read App.jsx file template and change import of scss file to css file
+        let appJSX = ReactWebpackConfig.templates[4].file;
+        appJSX = appJSX.replace(/style.scss/, "style.css");
+
+        // Save new App.jsx file template
+        ReactWebpackConfig.templates[4].file = appJSX;
+
+        // Rename scss file in project to css
+        ReactWebpackConfig.templates[5].path = "/src/style/style.css";
+      } else {
+        const scssRegex = styleRegexFile.split("-")[1];
+
+        webpackConfigFile = webpackConfigFile.replace(
+          /--STYLE REGEX--/,
+          scssRegex
+        );
+
+        const styleLoaders = '["style-loader", "css-loader", "sass-loader"]';
+        webpackConfigFile.replace(/--STYLE LOADERS--/, styleLoaders);
       }
 
       // Save new webpack config file in templates
