@@ -3,6 +3,7 @@
 // Require dependencies
 const chalk = require("chalk");
 const fs = require("fs");
+const path = require("path");
 
 // Require Project class
 const Project = require("./Project");
@@ -80,7 +81,9 @@ switch (projectType) {
       const proxy = checkForProxy();
       if (proxy) {
         // Get proxy text from txt file
-        let proxyText = fs.readFileSync("./templates/proxy.txt").toString();
+        let proxyText = fs
+          .readFileSync(path.join(__dirname, "templates/proxy.txt"))
+          .toString();
         proxyText = proxyText.replace(/--PROXY--/, proxy);
         webpackConfigFile = webpackConfigFile.replace(
           /--PORT--/,
@@ -95,7 +98,9 @@ switch (projectType) {
 
       // Code which check for --no-sass flag
       const styleRegexFile = fs
-        .readFileSync("./templates/react-webpack/styleRegex.txt")
+        .readFileSync(
+          path.join(__dirname, "templates/react-webpack/styleRegex.txt")
+        )
         .toString();
 
       if (args.includes("--no-sass")) {
