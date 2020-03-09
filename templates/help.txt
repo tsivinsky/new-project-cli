@@ -1,1 +1,4 @@
-For use this package, see the documentation on GitHub: https://github.com/tsivinsky/new-project-cli
+
+--PACKAGE--
+Current version: --VERSION--
+Docs: https://github.com/tsivinsky/new-project-cli
