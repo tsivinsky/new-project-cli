@@ -40,13 +40,9 @@ if (args.includes("--version") || args.includes("-v")) {
 }
 
 // Return a help message
-if (args.includes("--help") || args.includes("-h")) {
-  const help = require("./config/help");
-  return console.log(`
-Package name: ${help.name}
-Current version: ${help.version}
-${help.message}
-  `);
+if (args[0] === "--help" || args[0] === "-h") {
+  require("./config/help")();
+  return;
 }
 
 // Variable for main file
