@@ -2,14 +2,17 @@
 const fs = require("fs");
 const path = require("path");
 
-// Get version of package
-const version = require("../package.json").version;
+module.exports = function() {
+  // Get package`s data
+  const package = require("../package.json").name;
+  const version = require("../package.json").version;
 
-// Read message from file
-const message = fs.readFileSync(path.join(__dirname, "../templates/help.txt"));
+  // Read message from file
+  let message = fs
+    .readFileSync(path.join(__dirname, "../templates/help.txt"))
+    .toString();
+  message = message.replace(/--PACKAGE--/, package);
+  message = message.replace(/--VERSION--/, version);
 
-module.exports = {
-  name: "new-project",
-  version,
-  message
+  return console.log(message);
 };
