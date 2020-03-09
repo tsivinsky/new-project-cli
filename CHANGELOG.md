@@ -1,3 +1,7 @@
+# 2.7.0
+
+- Change help message
+
 # 2.6.4
 
 - Fix bug with generating react-webpack project with sass, when there is --STYLE LOADERS-- string in webpack.config.js file
