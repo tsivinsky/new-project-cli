@@ -1,4 +1,6 @@
-    proxy: [{
-      path: "/api/",
-      target: "--PROXY--"
-    }]
+    proxy: {
+      "/api": {
+        target: "--PROXY--",
+        historyApiFallback: true
+      }
+    }
