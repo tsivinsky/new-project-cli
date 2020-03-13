@@ -1,3 +1,7 @@
+# 2.8.0
+
+- Change template of electron application. Add menu template and some checks
+
 # 2.7.0
 
 - Change help message
