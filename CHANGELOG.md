@@ -1,3 +1,8 @@
+# 2.9.0
+
+- Update project types. For example, `react-webpack` was changed for `react`
+- Add package-lock.json file with versions of dependencies
+
 # 2.8.0
 
 - Change template of electron application. Add menu template and some checks
