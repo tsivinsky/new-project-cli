@@ -45,7 +45,7 @@ Or
 ### **React Webpack Application**
 
 ```
- new-project react-webpack <PROJECT_NAME>
+ new-project react <PROJECT_NAME>
 ```
 
 #### Flags
@@ -54,19 +54,19 @@ Or
    This flag allows you to set proxy field to webpack config file
 
 ```
-  new-project react-webpack react-app --proxy=http://localhost:5000
+  new-project react react-app --proxy=http://localhost:5000
 ```
 
 ### **Express Application**
 
 ```
-  new-project express-app <PROJECT_NAME>
+  new-project express <PROJECT_NAME>
 ```
 
 ### **Electron Application**
 
 ```
-  new-project electron-app <PROJECT_NAME>
+  new-project electron <PROJECT_NAME>
 ```
 
 ### **Flags which is supported by all types**
@@ -75,12 +75,12 @@ Or
    This flag allows you to change main file name of new project, like this:
 
 ```
-  new-project react-webpack react-app --main-file=app.js
+  new-project react react-app --main-file=app.js
 ```
 
 2. --yarn<br>
    This flag allows you to set default package manager to yarn.
 
 ```
-  new-project react-webpack react-app --yarn
+  new-project react react-app --yarn
 ```
