@@ -52,7 +52,7 @@ let mainFile = "";
 const { checkForFile, checkForManager, checkForProxy } = require("./functions");
 
 switch (projectType) {
-  case "react-webpack":
+  case "react":
     if (projectName) {
       mainFile = checkForFile("index.js");
       manager = checkForManager();
@@ -164,7 +164,7 @@ switch (projectType) {
       console.log(chalk.yellow("Enter a valid name of project"));
     }
     break;
-  case "express-app":
+  case "express":
     if (projectName) {
       mainFile = checkForFile("server.js");
       manager = checkForManager();
@@ -194,7 +194,7 @@ switch (projectType) {
       console.log(chalk.yellow("Enter a valid name of project"));
     }
     break;
-  case "electron-app":
+  case "electron":
     if (projectName) {
       mainFile = checkForFile("main.js");
       manager = checkForManager();
