@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "chalk": "^3.0.0",
-    "node-flags": "^0.1.9",
-    "shelljs": "^0.8.3"
+    "node-flags": "^0.1.9"
   }
 }
