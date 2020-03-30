@@ -160,6 +160,8 @@ switch (projectType) {
       });
 
       ReactWebpack.create();
+
+      ReactWebpack.bye();
     } else {
       console.log(chalk.yellow("Enter a valid name of project"));
     }
@@ -190,6 +192,8 @@ switch (projectType) {
       });
 
       ExpressApp.create();
+
+      ExpressApp.bye();
     } else {
       console.log(chalk.yellow("Enter a valid name of project"));
     }
@@ -215,6 +219,8 @@ switch (projectType) {
       });
 
       ElectronApp.create();
+
+      ElectronApp.bye();
     } else {
       console.log(chalk.yellow("Enter a valid name of project"));
     }
