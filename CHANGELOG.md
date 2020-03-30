@@ -1,3 +1,8 @@
+# 2.10.0
+
+- Uninstall shelljs. Now script uses internal Node.js module, child_process
+- Add function, which print bye message in console, into Project class
+
 # 2.9.0
 
 - Update project types. For example, `react-webpack` was changed for `react`
