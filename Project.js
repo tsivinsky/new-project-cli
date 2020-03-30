@@ -1,6 +1,7 @@
 // Require dependencies
 const fs = require("fs");
-const shell = require("shelljs");
+const path = require("path");
+const exec = require("child_process").execSync;
 const chalk = require("chalk");
 const { splitPackages, readFile, writeJson, addFile } = require("./functions");
 
@@ -40,16 +41,14 @@ class Project {
     fs.mkdirSync(baseUrl);
 
     // Cd to a new project folder and initialize it
-    shell.exec(`cd ${this.name} && ${this.manager} init -y`);
+    exec(`cd ${this.name} && ${this.manager} init -y`);
 
     console.log(
       chalk.green("Now, script is installing dependencies to your new project.")
     );
 
     // Install usual dependencies
-    shell.exec(
-      splitPackages(this.packages.usual, this.name, false, this.manager)
-    );
+    exec(splitPackages(this.packages.usual, this.name, false, this.manager));
 
     console.log(
       chalk.green(
@@ -59,9 +58,7 @@ class Project {
 
     // Install dev dependencies
     if (typeof this.packages.dev !== "undefined") {
-      shell.exec(
-        splitPackages(this.packages.dev, this.name, true, this.manager)
-      );
+      exec(splitPackages(this.packages.dev, this.name, true, this.manager));
     }
 
     console.log(
@@ -107,6 +104,16 @@ class Project {
         addFile(baseUrl + template.path, template.file);
       });
     }
+  }
+
+  bye() {
+    let message = fs
+      .readFileSync(path.join(__dirname, "bye-message.txt"))
+      .toString();
+
+    message = message.replace(/--PROJECT_NAME--/, this.name);
+    message = message.replace(/--MANAGER--/, this.manager);
+    console.log(chalk.blue(message));
   }
 }
 
