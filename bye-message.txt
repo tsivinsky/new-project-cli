@@ -1,0 +1,5 @@
+
+cd --PROJECT_NAME--
+--MANAGER-- start
+
+Happy hacking!
